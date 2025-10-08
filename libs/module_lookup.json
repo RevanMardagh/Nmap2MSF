@@ -1,0 +1,102 @@
+{
+  "ftp": [
+    {
+      "module": "auxiliary/scanner/ftp/anonymous",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    },
+    {
+      "module": "auxiliary/scanner/ftp/ftp_version",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    }
+  ],
+  "ssh": [
+    {
+      "module": "auxiliary/scanner/ssh/ssh_version",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    }
+  ],
+  "http": [
+    {
+      "module": "auxiliary/scanner/http/http_version",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    },
+    {
+      "module": "auxiliary/scanner/http/dir_scanner",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {
+        "THREADS": "10"
+      }
+    }
+  ],
+  "microsoft-ds": [
+    {
+      "module": "auxiliary/scanner/smb/smb_version",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    },
+    {
+      "module": "auxiliary/scanner/smb/smb_enumusers",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    },
+    {
+      "module": "auxiliary/scanner/smb/smb_login",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {
+        "SMBUser": "anonymous",
+        "SMBPass": ""
+      }
+    }
+  ],
+  "domain": [
+    {
+      "module": "auxiliary/scanner/dns/dns_recursion",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    }
+  ],
+  "smtp": [
+    {
+      "module": "auxiliary/scanner/smtp/smtp_version",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    },
+    {
+      "module": "auxiliary/scanner/smtp/smtp_vrfy",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    }
+  ],
+  "mysql": [
+    {
+      "module": "auxiliary/scanner/mysql/mysql_version",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {},
