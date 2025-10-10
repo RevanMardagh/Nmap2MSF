@@ -147,6 +147,7 @@ def generate_ai_modules(services, api_key: str) -> Any:
     8. Assume seclists is installed, and set the wordlists using the correct path if the module requires one. Dont set wordlists that would take longer than 5 minutes
     9. Provide the keys in the order provided to you in the example. 
     10. If exists, provide vulnerability scanning modules 
+    11. Note that these services are all outputs of Nmap. 
 
     Generate results for these services: 
     """
@@ -183,9 +184,10 @@ def generate_ai_modules(services, api_key: str) -> Any:
         text_obj = normalize_ai_response(response.text)
 
         # ensure database folder exists and write (relative path as in your original)
-        out_dir = os.path.join("..", "database")
+        out_dir = 'database'
         os.makedirs(out_dir, exist_ok=True)
         out_path = os.path.join(out_dir, "ai_lookup.json")
+
         with open(out_path, "w", encoding="utf-8") as f:
             json.dump(text_obj, f, indent=2, ensure_ascii=False)
 
