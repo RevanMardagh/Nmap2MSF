@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import argparse
 import os
 import fontstyle
@@ -5,6 +7,8 @@ from libs.nmap_parser import parse_nmap_xml
 from libs.module_lookup import load_lookup
 from libs.rc_writer import write_rc
 from libs.ask_ai import generate_ai_modules
+from libs.interactive import interactive_select_modules
+
 
 def main():
     p = argparse.ArgumentParser(description='Generate Metasploit .rc from Nmap XML (modular)')
@@ -12,13 +16,8 @@ def main():
     p.add_argument('-o', '--output', required=False, help='Output .rc file')
     p.add_argument('--lookup', help='Path to module_lookup.json (optional)')
     p.add_argument('-s','--ai-support', help='Enable AI-provided modules', action='store_true')
-    p.add_argument('-I','--interactive', help='Interactive mode to manually select modules', action='store_true')
+    p.add_argument('-c','--interactive', help='Interactive mode to manually select modules', action='store_true')
     args = p.parse_args()
-
-
-
-
-
 
 
 
@@ -88,6 +87,11 @@ def main():
     if lookup is None:
         print(f"[!] No modules found in lookup file: {lookup_path}. Please create or populate '{default_lookup}' and try again.")
         return
+
+
+    if args.interactive:
+        interactive_select_modules(hosts,lookup)
+
 
     # ---- proceed to write .rc ----
     out = write_rc(hosts, lookup, computed_output)
