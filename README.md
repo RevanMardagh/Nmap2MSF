@@ -12,7 +12,7 @@ Generate Metasploit scripts to automate enumeration from Nmap XML outputs
 - Optional interactive mode to approve modules before adding them.
 - Optional AI-assisted suggestions (generate candidate modules as JSON).
 - Colorized console output and clear logs for easy review.
-- Small, modular codebase meant for integration into pipelines.
+- Small, modular database meant for scalability and customizability.
 
 ---
 

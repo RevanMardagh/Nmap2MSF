@@ -48,7 +48,7 @@ def main():
     o(f"[*] Input file: {args.input}")
     o(f"[*] Output file: {computed_output}")
     o(f"[*] Using default lookup file: {'yes' if used_default_lookup else 'no'}")
-    o(f"[*] AI support enabled: {'yes' if args.ai_support else 'no'}")
+    o(f"[*] AI support enabled: {'yes' if args.ai_support else 'no'}\n\r")
 
     # parse nmap xml
     hosts = list(parse_nmap_xml(args.input))
