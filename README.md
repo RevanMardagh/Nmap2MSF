@@ -1,6 +1,7 @@
 # ReconPipe
 Generate Metasploit scripts to automate enumeration from Nmap XML outputs
 
+https://github.com/RevanMardagh/ReconPipe
 
 ---
 
