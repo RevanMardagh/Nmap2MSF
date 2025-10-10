@@ -38,7 +38,7 @@
       "use_setg": true,
       "rhost_param": "RHOSTS",
       "extra_options": {
-        "THREADS": "10"
+        "THREADS": "70"
       }
     }
   ],
@@ -99,4 +99,53 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {},
+      "extra_options": {}
+    }
+  ],
+  "ms-sql-s": [
+    {
+      "module": "auxiliary/scanner/mssql/mssql_ping",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    }
+  ],
+  "snmp": [
+    {
+      "module": "auxiliary/scanner/snmp/snmp_login",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {
+        "COMMUNITY": "public"
+      }
+    },
+    {
+      "module": "auxiliary/scanner/snmp/snmp_enum",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    }
+  ],
+  "postgresql": [
+    {
+      "module": "auxiliary/scanner/postgres/postgres_version",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    }
+  ],
+  "redis": [
+    {
+      "module": "auxiliary/scanner/redis/redis_info",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {}
+    }
+  ]
+}
+

@@ -37,8 +37,16 @@ def parse_nmap_xml(xml_path: str) -> Generator[Dict, None, None]:
             svc = port.find('service')
             service = svc.get('name') if svc is not None and svc.get('name') else ''
             product = svc.get('product') if svc is not None and svc.get('product') else ''
-            ports.append({'port': portid, 'protocol': protocol, 'service': service.lower(), 'product': product})
+            version = svc.get('version') if svc is not None and svc.get('version') else ''
+            ports.append({'port': portid, 'protocol': protocol, 'service': service.lower(), 'product': product, 'version': version})
 
         if ports:
             yield {'ip': ip, 'ports': ports}
 
+
+if __name__ == '__main__':
+    hosts = list(parse_nmap_xml('../test xml files/out2.xml'))
+    print(hosts, "\n\n\r\r")
+
+    import pprint
+    pprint.pprint(hosts)

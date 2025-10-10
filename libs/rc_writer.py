@@ -22,7 +22,9 @@ def generate_rc_for_host(host: Dict[str, Any], lookup: Dict[str, List[Dict[str, 
         svc = p.get('service', '')
         prod = p.get('product', '')
         lines.append(f"# service: {svc} port: {port} product: {prod}")
+        # print(svc, port, prod)
         modules = find_modules_for_service(lookup, svc)
+        # print(modules)
         if not modules:
             lines.append(f"# No module mapping found for service '{svc}' — skipping")
             lines.append('')
@@ -37,7 +39,7 @@ def generate_rc_for_host(host: Dict[str, Any], lookup: Dict[str, List[Dict[str, 
             seen_module_port.add(key)
 
             lines.append('')
-            lines.append(f"# Module: {module_path}")
+            # lines.append(f"# Module: {module_path}")
             lines.append(f"use {module_path}")
             use_setg = bool(mod.get('use_setg', True))
             rhost_param = mod.get('rhost_param', 'RHOSTS')
@@ -68,4 +70,5 @@ def write_rc(hosts: List[Dict[str, Any]], lookup: Dict[str, List[Dict[str, Any]]
         for h in hosts:
             fh.write(generate_rc_for_host(h, lookup))
     return out_path
+
 
