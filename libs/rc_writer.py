@@ -4,6 +4,29 @@ Functions to assemble the .rc content and write it to disk.
 """
 from typing import Dict, List, Any
 from libs.module_lookup import find_modules_for_service
+import fontstyle
+
+
+def _styled(text: str, style: str) -> str:
+    """Return text styled using fontstyle if available, otherwise plain text.
+
+    This wrapper attempts to call the most common fontstyle API (apply).
+    If that fails for any reason it will return the original text so the
+    tool remains robust even if fontstyle isn't present at runtime.
+    """
+    try:
+        # Most common usage: fontstyle.apply(text, "red/bold")
+        apply_fn = getattr(fontstyle, "apply", None)
+        if callable(apply_fn):
+            return apply_fn(text, style)
+        # Some builds might expose `stylize` instead; try that as a fallback
+        stylize_fn = getattr(fontstyle, "stylize", None)
+        if callable(stylize_fn):
+            return stylize_fn(text, style)
+    except Exception:
+        # If anything goes wrong, fall back to plain text
+        pass
+    return text
 
 
 def generate_rc_for_host(host: Dict[str, Any], lookup: Dict[str, List[Dict[str, Any]]]) -> str:
@@ -11,6 +34,7 @@ def generate_rc_for_host(host: Dict[str, Any], lookup: Dict[str, List[Dict[str, 
     ip = host['ip']
     lines: List[str] = []
     lines.append(f"# ---------- Host: {ip} ----------")
+    print(_styled(f"\n\n\r\r ---------- Host: {ip} ----------", "magenta/bold"))
     lines.append(f"setg RHOSTS {ip}")
     lines.append(f"setg RHOST {ip}")
     lines.append('')
@@ -22,16 +46,20 @@ def generate_rc_for_host(host: Dict[str, Any], lookup: Dict[str, List[Dict[str, 
         svc = p.get('service', '')
         prod = p.get('product', '')
         lines.append(f"# service: {svc} port: {port} product: {prod}")
+        print(_styled(f"\n\r[*] service: {svc}; port: {port}; product: {prod}", "cyan"))
+
         # print(svc, port, prod)
         modules = find_modules_for_service(lookup, svc)
         # print(modules)
         if not modules:
             lines.append(f"# No module mapping found for service '{svc}' — skipping")
+            print(_styled(f"[-] No module mapping found for service '{svc}' — skipping", "red/bold"))
             lines.append('')
             continue
         lines.append(f"set RPORT {port}")
         for mod in modules:
             module_path = mod.get('module')
+            module_flag = mod.get('flag')
             # avoid repeating identical module+port combos
             key = (module_path, port)
             if key in seen_module_port:
@@ -41,6 +69,8 @@ def generate_rc_for_host(host: Dict[str, Any], lookup: Dict[str, List[Dict[str, 
             lines.append('')
             # lines.append(f"# Module: {module_path}")
             lines.append(f"use {module_path}")
+            print(_styled(f"[+] Using module {module_path} (Flag: {module_flag})", "green/bold"))
+
             use_setg = bool(mod.get('use_setg', True))
             rhost_param = mod.get('rhost_param', 'RHOSTS')
             if not use_setg:
@@ -63,6 +93,7 @@ def generate_rc_for_host(host: Dict[str, Any], lookup: Dict[str, List[Dict[str, 
     return '\n'.join(lines)
 
 
+
 def write_rc(hosts: List[Dict[str, Any]], lookup: Dict[str, List[Dict[str, Any]]], out_path: str):
     with open(out_path, 'w', encoding='utf-8') as fh:
         fh.write('# Metasploit .rc generated from Nmap XML\n')
@@ -70,5 +101,3 @@ def write_rc(hosts: List[Dict[str, Any]], lookup: Dict[str, List[Dict[str, Any]]
         for h in hosts:
             fh.write(generate_rc_for_host(h, lookup))
     return out_path
-
-

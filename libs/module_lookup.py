@@ -5,7 +5,7 @@ import json
 from typing import Dict, List, Any, Optional
 from pathlib import Path
 
-DEFAULT_LOOKUP_PATH = Path('module_lookup.json')
+DEFAULT_LOOKUP_PATH = Path('../database/module_lookup.json')
 
 
 def load_lookup(path: str = None) -> Optional[Dict[str, List[Dict[str, Any]]]]:

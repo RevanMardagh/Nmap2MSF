@@ -10,19 +10,23 @@ def main():
     p.add_argument('-i', '--input', required=True, help='Nmap XML file')
     p.add_argument('-o', '--output', required=False, help='Output .rc file')
     p.add_argument('--lookup', help='Path to module_lookup.json (optional)')
+    p.add_argument('-s','--ai-support', help='Enable AI-provided modules', action='store_true')
     args = p.parse_args()
 
+    print("Input file selected: ", args.input)
 
     if args.output:
         output = args.output
+        print("Output file selected: ", output)
     else:
         output = f"{os.path.splitext(os.path.basename(args.input))[0]}.rc"
-        print(output)
+        print(f"Output file not selected, will use {output}")
 
-    print(args.input)
+
+    # print(args.input)
 
     # Determine lookup path: use provided one if given, otherwise default to module_lookup.json
-    default_lookup = 'libs/module_lookup.json'
+    default_lookup = 'database/module_lookup.json'
     lookup_path = args.lookup if args.lookup else default_lookup
 
     # If user provided a path but it doesn't exist, fall back to the default and inform the user

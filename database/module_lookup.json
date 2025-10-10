@@ -5,14 +5,16 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     },
     {
       "module": "auxiliary/scanner/ftp/ftp_version",
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     }
   ],
   "ssh": [
@@ -21,7 +23,8 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     }
   ],
   "http": [
@@ -30,7 +33,8 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     },
     {
       "module": "auxiliary/scanner/http/dir_scanner",
@@ -39,7 +43,8 @@
       "rhost_param": "RHOSTS",
       "extra_options": {
         "THREADS": "70"
-      }
+      },
+      "flag": "safe"
     }
   ],
   "microsoft-ds": [
@@ -48,14 +53,16 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     },
     {
       "module": "auxiliary/scanner/smb/smb_enumusers",
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     },
     {
       "module": "auxiliary/scanner/smb/smb_login",
@@ -65,7 +72,37 @@
       "extra_options": {
         "SMBUser": "anonymous",
         "SMBPass": ""
-      }
+      },
+      "flag": "safe"
+    }
+  ],
+  "netbios-ssn": [
+    {
+      "module": "auxiliary/scanner/smb/smb_version",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {},
+      "flag": "safe"
+    },
+    {
+      "module": "auxiliary/scanner/smb/smb_enumusers",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {},
+      "flag": "safe"
+    },
+    {
+      "module": "auxiliary/scanner/smb/smb_login",
+      "action": "run",
+      "use_setg": true,
+      "rhost_param": "RHOSTS",
+      "extra_options": {
+        "SMBUser": "anonymous",
+        "SMBPass": ""
+      },
+      "flag": "safe"
     }
   ],
   "domain": [
@@ -74,7 +111,8 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     }
   ],
   "smtp": [
@@ -83,14 +121,16 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     },
     {
       "module": "auxiliary/scanner/smtp/smtp_vrfy",
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     }
   ],
   "mysql": [
@@ -99,7 +139,8 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     }
   ],
   "ms-sql-s": [
@@ -108,7 +149,8 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     }
   ],
   "snmp": [
@@ -119,14 +161,16 @@
       "rhost_param": "RHOSTS",
       "extra_options": {
         "COMMUNITY": "public"
-      }
+      },
+      "flag": "safe"
     },
     {
       "module": "auxiliary/scanner/snmp/snmp_enum",
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     }
   ],
   "postgresql": [
@@ -135,7 +179,8 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     }
   ],
   "redis": [
@@ -144,8 +189,8 @@
       "action": "run",
       "use_setg": true,
       "rhost_param": "RHOSTS",
-      "extra_options": {}
+      "extra_options": {},
+      "flag": "safe"
     }
   ]
 }
-
